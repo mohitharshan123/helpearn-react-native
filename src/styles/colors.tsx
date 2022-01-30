@@ -5,5 +5,9 @@ export const colors = {
     text: {
       prinmary: "#96A7AF",
     },
+    button: {
+      primary: "#40DF9F",
+      secondary: "#286053",
+    },
   },
 };

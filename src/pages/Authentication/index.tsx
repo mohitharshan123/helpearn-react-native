@@ -19,11 +19,13 @@ import {
 import MainLayout from "../../components/Common/MainLayout";
 import ProfileIcon from "../../assets/icons/profile";
 import PasswordIcon from "../../assets/icons/password";
+import ShowPassword from "../../assets/icons/showPassword";
 
 import LargeText from "../../components/Text/LargeText";
 import Input from "../../components/Input";
 import { HEIGHT, WIDTH } from "../../styles/utils";
 import { colors } from "../../styles/colors";
+import Button from "../../components/Button";
 
 const auth = getAuth();
 
@@ -80,26 +82,30 @@ const Authentication: React.FC<{}> = ({ navigation }) => {
           <Input Icon={() => <ProfileIcon />} placeholder={"Enter email"} />
           <Input
             Icon={() => <PasswordIcon />}
+            RightIcon={() => <ShowPassword />}
             placeholder={"Enter password"}
             secureTextEntry
           />
         </View>
-        <TouchableOpacity
-          style={styles.button}
-          onPress={login}
-          activeOpacity={0.8}
-          disabled={disableButtons}
+        <View
+          style={{
+            justifyContent: "space-between",
+            display: "flex",
+            flex: 1,
+          }}
         >
-          <Text>Login</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={[styles.button, styles.registerButton]}
-          onPress={register}
-          activeOpacity={0.8}
-          disabled={disableButtons}
-        >
-          <Text style={styles.buttonText}>Register</Text>
-        </TouchableOpacity>
+          <Button buttonType="primary" onPress={login} activeOpacity={0.8}>
+            Sign in
+          </Button>
+          <Button
+            buttonType="secondary"
+            onPress={login}
+            activeOpacity={0.8}
+            buttonStyle={{ marginTop: 25 }}
+          >
+            Create an account
+          </Button>
+        </View>
       </View>
     </MainLayout>
   );
@@ -110,7 +116,7 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 28,
   },
-  formContainer: { marginBottom: 60 },
+  formContainer: { marginBottom: 60, flexDirection: "column" },
   header: { marginTop: HEIGHT * 0.2 },
   subtitle: { color: colors.dark.text.prinmary, fontSize: 24, marginTop: 8 },
   registerButton: { backgroundColor: "#800000", marginTop: 20 },
