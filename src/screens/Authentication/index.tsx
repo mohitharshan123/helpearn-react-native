@@ -9,9 +9,9 @@ import { useContext, useState } from "react";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import { HEIGHT } from "../../styles/utils";
 import { colors } from "../../styles/colors";
-import ProfileIcon from "../../assets/icons/profile";
-import PasswordIcon from "../../assets/icons/password";
-import ShowPasswordIcon from "../../assets/icons/showPassword";
+import ProfileIcon from "../../assets/icons/Profile";
+import PasswordIcon from "../../assets/icons/Password";
+import ShowPasswordIcon from "../../assets/icons/ShowPassword";
 import { Button, Input, MainLayout, LargeText } from "../../components";
 import { UserContext } from "../../contexts/user";
 import Firebase from "../../firebase";
@@ -27,7 +27,7 @@ const Authentication: React.FC<{}> = ({ navigation }) => {
 
   onAuthStateChanged(auth, (user) => {
     if (user != null) {
-      navigation.navigate("Home");
+      navigation.navigate("Dashboard");
     }
   });
 
@@ -35,7 +35,7 @@ const Authentication: React.FC<{}> = ({ navigation }) => {
     try {
       const { user } = await signInWithEmailAndPassword(auth, email, password);
       setUserInfo(user);
-      navigation.navigate("Home");
+      navigation.navigate("Dashboard");
     } catch (e) {
       console.log(e);
     }
@@ -49,7 +49,7 @@ const Authentication: React.FC<{}> = ({ navigation }) => {
         password
       );
       setUserInfo(user);
-      navigation.navigate("Home");
+      navigation.navigate("Dashboard");
     } catch (e) {
       console.log(e);
     }

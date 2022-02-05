@@ -1,9 +1,10 @@
 import React, { useState, useEffect, useContext } from "react";
+import { Text } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 import Authentication from "../screens/Authentication";
-import Home from "../screens/Home";
+import Dashboard from "../screens/Dashboard";
 import Onboarding from "../screens/Onboarding";
 import { UserContext } from "../contexts/user";
 
@@ -14,7 +15,6 @@ const StackNavigator: React.FC<any> = () => {
   const [isLoading, setIsLoading] = useState(true);
 
   const { user } = useContext(UserContext);
-  console.log(user, "user");
 
   const checkIsOnboard = async () => {
     try {
@@ -34,12 +34,12 @@ const StackNavigator: React.FC<any> = () => {
   }, []);
 
   const getInitialRoute = () => {
-    if (user) return "Home";
+    if (user) return "Dashboard";
     if (isOnboard) return "Authentication";
     return "Onboarding";
   };
 
-  if (isLoading) return null;
+  if (isLoading) return <Text>Loading</Text>;
 
   return (
     <Stack.Navigator
@@ -48,7 +48,7 @@ const StackNavigator: React.FC<any> = () => {
     >
       <Stack.Screen name="Onboarding" component={Onboarding} />
       <Stack.Screen name="Authentication" component={Authentication} />
-      <Stack.Screen name="Home" component={Home} />
+      <Stack.Screen name="Dashboard" component={Dashboard} />
     </Stack.Navigator>
   );
 };
