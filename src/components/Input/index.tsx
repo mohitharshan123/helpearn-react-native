@@ -17,7 +17,6 @@ const Input: React.FC<any> = (props: InputProps) => {
       <View style={styles.inputContainer}>
         <TextInput
           style={styles.input}
-          onChangeText={props.onChangeText}
           value={props.value}
           placeholder={props.placeholder}
           placeholderTextColor={colors.dark.text.prinmary}

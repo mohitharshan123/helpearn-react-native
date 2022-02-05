@@ -1,16 +1,20 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-
-import Authentication from "../pages/Authentication";
-import Home from "../pages/Home";
-import Onboarding from "../pages/Onboarding";
-
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
+
+import Authentication from "../screens/Authentication";
+import Home from "../screens/Home";
+import Onboarding from "../screens/Onboarding";
+import { UserContext } from "../contexts/user";
+
 const Stack = createNativeStackNavigator();
 
 const StackNavigator: React.FC<any> = () => {
   const [isOnboard, setIsOnboard] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+
+  const { user } = useContext(UserContext);
+  console.log(user, "user");
 
   const checkIsOnboard = async () => {
     try {
@@ -29,12 +33,18 @@ const StackNavigator: React.FC<any> = () => {
     checkIsOnboard();
   }, []);
 
+  const getInitialRoute = () => {
+    if (user) return "Home";
+    if (isOnboard) return "Authentication";
+    return "Onboarding";
+  };
+
   if (isLoading) return null;
 
   return (
     <Stack.Navigator
       screenOptions={{ headerShown: false, statusBarHidden: true }}
-      initialRouteName={isOnboard ? "Authentication" : "Onboarding"}
+      initialRouteName={getInitialRoute()}
     >
       <Stack.Screen name="Onboarding" component={Onboarding} />
       <Stack.Screen name="Authentication" component={Authentication} />

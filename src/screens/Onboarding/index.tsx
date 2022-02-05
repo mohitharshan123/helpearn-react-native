@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { StyleSheet } from "react-native";
 import OnboardingSwiper from "react-native-onboarding-swiper";
 import AsyncStorage from "@react-native-async-storage/async-storage";
