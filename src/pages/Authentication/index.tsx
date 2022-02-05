@@ -19,7 +19,7 @@ import {
 import MainLayout from "../../components/Common/MainLayout";
 import ProfileIcon from "../../assets/icons/profile";
 import PasswordIcon from "../../assets/icons/password";
-import ShowPassword from "../../assets/icons/showPassword";
+import ShowPasswordIcon from "../../assets/icons/showPassword";
 
 import LargeText from "../../components/Text/LargeText";
 import Input from "../../components/Input";
@@ -76,13 +76,13 @@ const Authentication: React.FC<{}> = ({ navigation }) => {
       <View style={formContainer}>
         <View style={styles.header}>
           <LargeText>Welcome!</LargeText>
-          <Text style={styles.subtitle}>Sign in to Continue</Text>
+          <Text style={styles.subtitle}>Sign in to continue. </Text>
         </View>
         <View style={styles.formContainer}>
           <Input Icon={() => <ProfileIcon />} placeholder={"Enter email"} />
           <Input
             Icon={() => <PasswordIcon />}
-            RightIcon={() => <ShowPassword />}
+            RightIcon={() => <ShowPasswordIcon />}
             placeholder={"Enter password"}
             secureTextEntry
           />
