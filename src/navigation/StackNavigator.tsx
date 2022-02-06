@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-import { Text } from "react-native";
+import { Text, View } from "react-native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
@@ -42,14 +42,14 @@ const StackNavigator: React.FC<any> = () => {
   if (isLoading) return <Text>Loading</Text>;
 
   return (
-    <Stack.Navigator
-      screenOptions={{ headerShown: false, statusBarHidden: true }}
-      initialRouteName={getInitialRoute()}
-    >
-      <Stack.Screen name="Onboarding" component={Onboarding} />
-      <Stack.Screen name="Authentication" component={Authentication} />
-      <Stack.Screen name="Dashboard" component={Dashboard} />
-    </Stack.Navigator>
+      <Stack.Navigator
+        screenOptions={{ headerShown: false, statusBarHidden: true }}
+        initialRouteName={getInitialRoute()}
+      >
+        <Stack.Screen name="Onboarding" component={Onboarding} />
+        <Stack.Screen name="Authentication" component={Authentication} />
+        <Stack.Screen name="Dashboard" component={Dashboard} />
+      </Stack.Navigator>
   );
 };
 

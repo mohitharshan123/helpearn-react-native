@@ -12,8 +12,13 @@ import {
   MessagesActive,
   NotificationsActive,
 } from "../../assets";
+import AddButton from "../../components/Button/AddButton";
 
 const Tab = createBottomTabNavigator();
+
+const NoopComponent = () => {
+  return null;
+};
 
 const Dashboard: React.FC<{}> = () => {
   const tabBarScreenOptions = ({ route: { name: routeName } }) => ({
@@ -39,6 +44,13 @@ const Dashboard: React.FC<{}> = () => {
     <Tab.Navigator screenOptions={tabBarScreenOptions}>
       <Tab.Screen name="Home" component={Home} />
       <Tab.Screen name="Messages" component={Home} />
+      <Tab.Screen
+        name={"Add"}
+        component={NoopComponent}
+        options={{
+          tabBarButton: () => <AddButton />,
+        }}
+      />
       <Tab.Screen name="Notifications" component={Home} />
       <Tab.Screen name="Settings" component={Home} />
     </Tab.Navigator>
