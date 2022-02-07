@@ -24,7 +24,6 @@ export default ({  y }: HeaderProps) => {
 
   return (
     <Animated.View style={[styles.container, animatedOpacity]}>
-     
     </Animated.View>
   );
 };

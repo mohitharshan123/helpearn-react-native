@@ -6,10 +6,10 @@ import { colors } from "../../../styles/colors";
 export default ({ job }) => (
   <View style={styles.row}>
     <View style={styles.cell}>
-      <Text style={styles.index}>{job.created_by}</Text>
+      <Text style={styles.index}>{job.category}</Text>
     </View>
     <View style={[styles.cell, { flex: 1 }]}>
-      <Text style={styles.name}>{job.category}</Text>
+      <Text style={styles.name}>{job.created_by}</Text>
       <Text style={styles.artist}>{job.description}</Text>
     </View>
     <View style={styles.cell}>

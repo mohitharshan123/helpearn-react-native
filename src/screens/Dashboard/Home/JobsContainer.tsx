@@ -1,14 +1,9 @@
 import * as React from "react";
 import { View, StyleSheet } from "react-native";
 import { useSharedValue } from "react-native-reanimated";
-import { Album } from "./Model";
 import Content from "./Content";
 import Cover from "./Cover";
 import { colors } from "../../../styles/colors";
-
-// interface AlbumProps {
-//   album: Album;
-// }
 
 export default ({ jobs }) => {
   const y = useSharedValue(0);

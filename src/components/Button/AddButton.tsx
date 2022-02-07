@@ -15,6 +15,11 @@ import Animated, {
 
 import { colors } from "../../styles/colors";
 
+const enum Modes {
+  EXPANDED = 1,
+  HIDDEN = 0,
+}
+
 const AddButton = () => {
   let mode = useSharedValue(0);
   let buttonSize = useSharedValue(1);
@@ -23,21 +28,31 @@ const AddButton = () => {
     withSequence(
       (buttonSize.value = withTiming(0.95, { duration: 300 })),
       (buttonSize.value = withTiming(1, { duration: 300 })),
-      (mode.value = withTiming(mode.value === 0 ? 1 : 0))
+      (mode.value = withTiming(
+        mode.value === Modes.HIDDEN ? Modes.EXPANDED : Modes.HIDDEN
+      ))
     );
   };
 
   const therStyles = useAnimatedStyle(() => ({
-    left: interpolate(mode.value, [0, 1], [12, -70]),
-    top: interpolate(mode.value, [0, 1], [-18, -100]),
+    left: interpolate(mode.value, [Modes.HIDDEN, Modes.EXPANDED], [12, -70]),
+    top: interpolate(mode.value, [Modes.HIDDEN, Modes.EXPANDED], [-18, -100]),
   }));
   const timeStyles = useAnimatedStyle(() => ({
-    left: interpolate(mode.value, [0, 1], [12, 70]),
-    top: interpolate(mode.value, [0, 1], [-18, -100]),
+    left: interpolate(mode.value, [Modes.HIDDEN, Modes.EXPANDED], [12, 70]),
+    top: interpolate(mode.value, [Modes.HIDDEN, Modes.EXPANDED], [-18, -100]),
   }));
 
   const sizeStyle = useAnimatedStyle(() => ({
-    transform: [{ scale: interpolate(mode.value, [0, 1], [1, 1.1]) }],
+    transform: [
+      {
+        scale: interpolate(
+          mode.value,
+          [Modes.HIDDEN, Modes.EXPANDED],
+          [1, 1.1]
+        ),
+      },
+    ],
   }));
 
   return (

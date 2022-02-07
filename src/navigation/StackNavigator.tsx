@@ -38,18 +38,20 @@ const StackNavigator: React.FC<any> = () => {
     if (isOnboard) return "Authentication";
     return "Onboarding";
   };
+  console.log(user);
+  console.log(getInitialRoute());
 
   if (isLoading) return <Text>Loading</Text>;
 
   return (
-      <Stack.Navigator
-        screenOptions={{ headerShown: false, statusBarHidden: true }}
-        initialRouteName={getInitialRoute()}
-      >
-        <Stack.Screen name="Onboarding" component={Onboarding} />
-        <Stack.Screen name="Authentication" component={Authentication} />
-        <Stack.Screen name="Dashboard" component={Dashboard} />
-      </Stack.Navigator>
+    <Stack.Navigator
+      screenOptions={{ headerShown: false, statusBarHidden: true }}
+      initialRouteName={getInitialRoute()}
+    >
+      <Stack.Screen name="Onboarding" component={Onboarding} />
+      <Stack.Screen name="Authentication" component={Authentication} />
+      <Stack.Screen name="Dashboard" component={Dashboard} />
+    </Stack.Navigator>
   );
 };
 

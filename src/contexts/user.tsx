@@ -4,9 +4,8 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 const UserContext = createContext({});
 
 const UserProvider = ({ children }) => {
-  const [user, setUser] = useState({});
+  const [user, setUser] = useState(null);
 
-  // Get current auth state from AsyncStorage
   const getUserInfo = async () => {
     try {
       const userInfoString = await AsyncStorage.getItem("userInfo");
