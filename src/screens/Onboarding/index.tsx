@@ -6,7 +6,7 @@ import {
   NavigationScreenProp,
   NavigationState,
 } from "react-navigation";
-import { ONBOARDING_PAGES } from "./utils";
+import { ONBOARDING_PAGES } from "./constants";
 
 import { colors } from "../../styles/colors";
 

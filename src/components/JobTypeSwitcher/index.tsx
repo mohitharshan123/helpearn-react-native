@@ -7,7 +7,12 @@ import { MaterialCommunityIcons, Entypo } from "@expo/vector-icons";
 import { SWITCH_HEIGHT, SWITCH_WIDTH } from "../../constants";
 import { colors } from "../../styles/colors";
 
-const Toggle = ({ handleOnPress, thumbColor, isRemote }) => {
+interface JobTypeSwitcherProps {
+  handleOnPress: Function;
+  isRemote: boolean;
+}
+
+const JobTypeSwitcher = ({ handleOnPress, isRemote }: JobTypeSwitcherProps) => {
   const [switchTranslate] = useState(new Animated.Value(0));
 
   useEffect(() => {
@@ -34,15 +39,15 @@ const Toggle = ({ handleOnPress, thumbColor, isRemote }) => {
     }).start();
   }, [isRemote, switchTranslate]);
 
-  const backgroundColour = {
-    backgroundColor: interpolateColors(switchTranslate, {
-      inputRange: [0, 20],
-      outputColorRange: [
-        colors.dark.button.primary,
-        colors.dark.button.secondary,
-      ],
-    }),
-  };
+  // const backgroundColour = {
+  //   backgroundColor: interpolateColors(switchTranslate, {
+  //     inputRange: [0, 20],
+  //     outputColorRange: [
+  //       colors.dark.button.primary,
+  //       colors.dark.button.secondary,
+  //     ],
+  //   }),
+  // };
   const onToggle = useCallback(() => {
     handleOnPress(!isRemote);
   }, [handleOnPress, isRemote]);
@@ -54,11 +59,11 @@ const Toggle = ({ handleOnPress, thumbColor, isRemote }) => {
         alignItems: "center",
       }}
     >
-      <Animated.View style={[styles.containerStyle, backgroundColour]}>
+      <Animated.View style={[styles.containerStyle]}>
         <Animated.View
           style={[
             styles.circleStyle,
-            { backgroundColor: thumbColor },
+            { backgroundColor: "gold" },
             {
               transform: [
                 {
@@ -108,7 +113,7 @@ const styles = StyleSheet.create({
     paddingVertical: 2,
     paddingHorizontal: 2,
     borderRadius: 36.5,
-    backgroundColor: colors.dark.primary,
+    backgroundColor: colors.dark.button.secondary,
     alignItems: "center",
     justifyContent: "center",
   },
@@ -124,17 +129,4 @@ const styles = StyleSheet.create({
   },
 });
 
-Toggle.propTypes = {
-  handleOnPress: PropTypes.func.isRequired,
-  activeTrackColor: PropTypes.string,
-  inActiveTrackColor: PropTypes.string,
-  thumbColor: PropTypes.string,
-};
-
-Toggle.defaultProps = {
-  activeTrackColor: "#007AFF",
-  inActiveTrackColor: "#F2F5F7",
-  thumbColor: "#FFF",
-};
-
-export default Toggle;
+export default JobTypeSwitcher;

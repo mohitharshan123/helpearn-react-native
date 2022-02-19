@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, View } from "react-native";
+import { StyleSheet, View, Text } from "react-native";
 import {
   Extrapolate,
   interpolate,
@@ -8,20 +8,23 @@ import {
 import { Ionicons } from "@expo/vector-icons";
 
 import { SWITCH_HEIGHT } from "../../constants";
-import { MAX_HEADER_HEIGHT } from "../../screens/Dashboard/Home/constants";
+import { MAX_HEADER_HEIGHT } from "../../common/constants";
+import { Category } from "../../common/interfaces/category.interface";
 
 interface CategoryItemProps {
-  Icon?: any;
-  RightIcon?: any;
   y: any;
-  item: any;
-  selectedCategory: any;
+  item: Category;
+  selectedCategory: Category;
 }
 
-const CategoryItem: React.FC<any> = (props: CategoryItemProps) => {
+const CategoryItem: React.FC<any> = ({
+  item,
+  selectedCategory,
+  y,
+}: CategoryItemProps) => {
   const animatedOpacity = useAnimatedStyle(() => ({
     opacity: interpolate(
-      props.y.value,
+      y.value,
       [-MAX_HEADER_HEIGHT, -SWITCH_HEIGHT / 2],
       [1, 0],
       Extrapolate.CLAMP
@@ -32,17 +35,18 @@ const CategoryItem: React.FC<any> = (props: CategoryItemProps) => {
       style={[
         styles.container,
         animatedOpacity,
-        props.selectedCategory === props.item && styles.selectedCatgory,
+        selectedCategory === item && styles.selectedCatgory,
       ]}
     >
-      <Ionicons name={props.item.icon} size={32} color="white" />
+      <Ionicons name={item.icon} size={32} color="white" />
+      <Text style={{ color: "white" }}>{item.label}</Text>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    flexDirection: "row",
+    flexDirection: "column",
     marginTop: 30,
     alignItems: "center",
     backgroundColor: "#FF575F",

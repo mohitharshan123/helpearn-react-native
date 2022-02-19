@@ -38,8 +38,6 @@ const StackNavigator: React.FC<any> = () => {
     if (isOnboard) return "Authentication";
     return "Onboarding";
   };
-  console.log(user);
-  console.log(getInitialRoute());
 
   if (isLoading) return <Text>Loading</Text>;
 

@@ -1,30 +1,20 @@
 import React, { useState } from "react";
-import { StyleSheet, TouchableOpacity, View } from "react-native";
-import Animated, {
-  Extrapolate,
-  interpolate,
-  useAnimatedScrollHandler,
-  useAnimatedStyle,
-} from "react-native-reanimated";
-import { FlatGrid } from "react-native-super-grid";
+import { StyleSheet, TouchableOpacity, View, SafeAreaView } from "react-native";
+import Animated, { useAnimatedScrollHandler } from "react-native-reanimated";
 
-import { MAX_HEADER_HEIGHT, MIN_HEADER_HEIGHT } from "./constants";
-
-import Item from "../../../components/Item";
 import { colors } from "../../../styles/colors";
-import JobTypeSwitch from "../../../components/Toggle";
-import CategoryItem from "../../../components/CategoryItem";
-import { SWITCH_HEIGHT } from "../../../constants";
+import { JobItem, CategoryItem, JobTypeSwitcher } from "../../../components";
+import { Category } from "../../../common/interfaces/category.interface";
 
-const CATEGORIES = [
-  { icon: "bicycle", isSelected: false },
-  { icon: "american-football", isSelected: false },
-  { icon: "cart", isSelected: false },
-  { icon: "camera", isSelected: false },
-  { icon: "book", isSelected: false },
-  { icon: "help-buoy", isSelected: false },
-  { icon: "bicycle", isSelected: false },
-  { icon: "bicycle", isSelected: false },
+const CATEGORIES: Array<Category> = [
+  { icon: "bicycle", label: "Ride" },
+  { icon: "american-football", label: "Ride" },
+  { icon: "cart", label: "Ride" },
+  { icon: "camera", label: "Ride" },
+  { icon: "book", label: "Ride" },
+  { icon: "help-buoy", label: "Ride" },
+  { icon: "bicycle", label: "Ride" },
+  { icon: "bicycle", label: "Ride" },
 ];
 
 interface ContentProps {
@@ -45,41 +35,43 @@ export default ({ jobs, y }: ContentProps) => {
     y.value = event.contentOffset.y;
   });
 
-  return (
-    <Animated.ScrollView
-      onScroll={scrollHandler}
-      style={styles.container}
-      showsVerticalScrollIndicator={false}
-      scrollEventThrottle={1}
-      stickyHeaderIndices={[1]}
-    >
-      <FlatGrid
-        itemDimension={80}
-        data={categories}
-        renderItem={({ item }) => (
-          <TouchableOpacity
-            activeOpacity={0.8}
-            onPress={() => setSelectedCategory(item)}
-          >
-            <CategoryItem
-              y={y}
-              item={item}
-              selectedCategory={selectedCategory}
-            />
-          </TouchableOpacity>
-        )}
-      />
+  const renderCategoryRow = (categories) => (
+    <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
+      {categories.slice(0, 4).map((item) => (
+        <TouchableOpacity
+          activeOpacity={0.8}
+          onPress={() => setSelectedCategory(item)}
+        >
+          <CategoryItem y={y} item={item} selectedCategory={selectedCategory} />
+        </TouchableOpacity>
+      ))}
+    </View>
+  );
 
-      <JobTypeSwitch
-        handleOnPress={handleOnJobsTypeToggle}
-        isRemote={isRemote}
-      />
-      <View style={styles.jobs}>
-        {jobs.map((job, key) => (
-          <Item {...{ job, key }} />
-        ))}
-      </View>
-    </Animated.ScrollView>
+  return (
+    <SafeAreaView style={{ flex: 1 }}>
+      <Animated.ScrollView
+        onScroll={scrollHandler}
+        style={styles.container}
+        showsVerticalScrollIndicator={false}
+        scrollEventThrottle={1}
+        stickyHeaderIndices={[1]}
+      >
+        <View style={{ flexDirection: "column", padding: 20 }}>
+          {renderCategoryRow(categories.slice(0, 4))}
+          {renderCategoryRow(categories.slice(4, 8))}
+        </View>
+        <JobTypeSwitcher
+          handleOnPress={handleOnJobsTypeToggle}
+          isRemote={isRemote}
+        />
+        <View style={styles.jobs}>
+          {jobs.map((job, key) => (
+            <JobItem {...{ job, key }} />
+          ))}
+        </View>
+      </Animated.ScrollView>
+    </SafeAreaView>
   );
 };
 
