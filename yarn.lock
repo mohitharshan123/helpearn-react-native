@@ -5498,6 +5498,13 @@ react-native-size-matters@^0.4.0:
   resolved "https://registry.yarnpkg.com/react-native-size-matters/-/react-native-size-matters-0.4.0.tgz#01bfd0d59454318f4e0b13fe9c1eb0523d70f2e0"
   integrity sha512-8/C0htHrFWeUm9N8JegmadovUfgTWkGBkDPZ1N3YkXtDWb+98Ya2gThiKcu445r8c7YhcrBfnHz/mYsXIusaOQ==
 
+react-native-super-grid@^4.2.0:
+  version "4.2.0"
+  resolved "https://registry.yarnpkg.com/react-native-super-grid/-/react-native-super-grid-4.2.0.tgz#df07d88d58f232cb2e01e0752f5279cc3b366ca4"
+  integrity sha512-5GpdcXwnwizjWECY7APpyoMyGEAieRy0hxCJl8JQAodg2IigWYx10eDHrW/b1Rw1hsZVNyo4qSrAM3iOLW2XPw==
+  dependencies:
+    prop-types "^15.6.0"
+
 react-native-svg-transformer@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/react-native-svg-transformer/-/react-native-svg-transformer-1.0.0.tgz#7a707e5e95d20321b5f3dcfd0c3c8762ebd0221b"

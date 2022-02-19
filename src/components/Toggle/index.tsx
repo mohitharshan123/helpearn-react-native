@@ -1,17 +1,15 @@
 import PropTypes from "prop-types";
 import React, { useEffect, useState, useCallback } from "react";
-import { StyleSheet, Pressable, View } from "react-native";
+import { StyleSheet, Pressable, View, Text } from "react-native";
 import Animated, { interpolateColors, spring } from "react-native-reanimated";
+import { MaterialCommunityIcons, Entypo } from "@expo/vector-icons";
 
 import { SWITCH_HEIGHT, SWITCH_WIDTH } from "../../constants";
-import {
-  HEADER_DELTA,
-  WINDOW_WIDTH,
-} from "../../screens/Dashboard/Home/constants";
 import { colors } from "../../styles/colors";
 
 const Toggle = ({ handleOnPress, thumbColor, isRemote }) => {
   const [switchTranslate] = useState(new Animated.Value(0));
+
   useEffect(() => {
     if (isRemote) {
       spring(switchTranslate, {
@@ -70,7 +68,22 @@ const Toggle = ({ handleOnPress, thumbColor, isRemote }) => {
             },
             styles.shadowValue,
           ]}
-        />
+        >
+          {isRemote ? (
+            <MaterialCommunityIcons
+              name="google-nearby"
+              size={24}
+              color={colors.dark.button.secondary}
+            />
+          ) : (
+            <Entypo
+              name="location"
+              size={24}
+              color={colors.dark.button.secondary}
+            />
+          )}
+        </Animated.View>
+        <Text style={styles.text}>{isRemote ? "Remote" : "Nearby"}</Text>
       </Animated.View>
     </Pressable>
   );
@@ -81,6 +94,14 @@ const styles = StyleSheet.create({
     width: SWITCH_HEIGHT,
     height: SWITCH_HEIGHT,
     borderRadius: 33,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  text: {
+    position: "absolute",
+    color: "white",
+    fontSize: 20,
+    fontWeight: "bold",
   },
   containerStyle: {
     width: SWITCH_WIDTH,
@@ -89,7 +110,7 @@ const styles = StyleSheet.create({
     borderRadius: 36.5,
     backgroundColor: colors.dark.primary,
     alignItems: "center",
-    opacity: 0.5,
+    justifyContent: "center",
   },
   shadowValue: {
     shadowColor: "#000",
