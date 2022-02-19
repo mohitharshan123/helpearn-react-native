@@ -1,11 +1,13 @@
 import * as React from "react";
 import { View, StyleSheet } from "react-native";
 import { useSharedValue } from "react-native-reanimated";
+
 import Content from "./Content";
 import Cover from "./Cover";
+
 import { colors } from "../../../styles/colors";
 
-export default ({ jobs }) => {
+const JobsContainer = ({ jobs }) => {
   const y = useSharedValue(0);
   return (
     <View style={styles.container}>
@@ -21,3 +23,5 @@ const styles = StyleSheet.create({
     backgroundColor: colors.dark.primary,
   },
 });
+
+export default JobsContainer;

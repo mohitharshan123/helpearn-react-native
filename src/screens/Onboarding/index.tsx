@@ -1,12 +1,20 @@
 import { StyleSheet } from "react-native";
 import OnboardingSwiper from "react-native-onboarding-swiper";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-
+import {
+  NavigationParams,
+  NavigationScreenProp,
+  NavigationState,
+} from "react-navigation";
 import { ONBOARDING_PAGES } from "./utils";
 
 import { colors } from "../../styles/colors";
 
-const Onboarding: React.FC<{}> = ({ navigation }) => {
+interface Props {
+  navigation: NavigationScreenProp<NavigationState, NavigationParams>;
+}
+
+const Onboarding: React.FC<Props> = ({ navigation }) => {
   const saveOnboardingState = async () => {
     try {
       await AsyncStorage.setItem("onboarding_completed", "true");

@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useState } from "react";
 import { StyleSheet, View } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import Animated, {
@@ -8,10 +8,12 @@ import Animated, {
   useAnimatedScrollHandler,
 } from "react-native-reanimated";
 
-import { MAX_HEADER_HEIGHT, MIN_HEADER_HEIGHT } from "./Model";
-import Track from "./Job";
-import ShufflePlay, { BUTTON_HEIGHT } from "./ShufflePlay";
+import { MAX_HEADER_HEIGHT, MIN_HEADER_HEIGHT } from "./constants";
+
+import Item from "../../../components/Item";
 import { colors } from "../../../styles/colors";
+import JobTypeSwitch from "../../../components/Toggle";
+import { SWITCH_HEIGHT } from "../../../constants";
 
 interface ContentProps {
   jobs: any;
@@ -19,11 +21,16 @@ interface ContentProps {
 }
 
 export default ({ jobs, y }: ContentProps) => {
+  const [isRemote, setIsNearby] = useState(false);
+
+  const handleOnJobsTypeToggle = (value) => {
+    setIsNearby(value);
+  };
   const animatedHeight = useAnimatedStyle(() => ({
     height: interpolate(
       y.value,
-      [-MAX_HEADER_HEIGHT, -BUTTON_HEIGHT / 2],
-      [0, MAX_HEADER_HEIGHT + BUTTON_HEIGHT],
+      [-MAX_HEADER_HEIGHT, -SWITCH_HEIGHT / 2],
+      [0, MAX_HEADER_HEIGHT + SWITCH_HEIGHT],
       Extrapolate.CLAMP
     ),
   }));
@@ -50,10 +57,13 @@ export default ({ jobs, y }: ContentProps) => {
           />
         </Animated.View>
       </View>
-      <ShufflePlay />
-      <View style={styles.tracks}>
+      <JobTypeSwitch
+        handleOnPress={handleOnJobsTypeToggle}
+        isRemote={isRemote}
+      />
+      <View style={styles.jobs}>
         {jobs.map((job, key) => (
-          <Track {...{ job, key }} />
+          <Item {...{ job, key }} />
         ))}
       </View>
     </Animated.ScrollView>
@@ -63,10 +73,10 @@ export default ({ jobs, y }: ContentProps) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: MIN_HEADER_HEIGHT - BUTTON_HEIGHT / 2,
+    paddingTop: MIN_HEADER_HEIGHT - SWITCH_HEIGHT / 2,
   },
   cover: {
-    height: MAX_HEADER_HEIGHT - BUTTON_HEIGHT,
+    height: MAX_HEADER_HEIGHT - SWITCH_HEIGHT - 20,
   },
   gradient: {
     position: "absolute",
@@ -75,19 +85,7 @@ const styles = StyleSheet.create({
     right: 0,
     alignItems: "center",
   },
-  artistContainer: {
-    ...StyleSheet.absoluteFillObject,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  artist: {
-    textAlign: "center",
-    color: "white",
-    fontSize: 48,
-    fontWeight: "bold",
-  },
-  tracks: {
-    paddingTop: 50,
+  jobs: {
     backgroundColor: colors.dark.primary,
   },
 });

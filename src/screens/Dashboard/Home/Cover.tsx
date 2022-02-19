@@ -5,15 +5,15 @@ import Animated, {
   Extrapolate,
   useAnimatedStyle,
 } from "react-native-reanimated";
+
+import { MAX_HEADER_HEIGHT, HEADER_DELTA } from "./constants";
+
 import { colors } from "../../../styles/colors";
-import { MAX_HEADER_HEIGHT, HEADER_DELTA } from "./Model";
-import { BUTTON_HEIGHT } from "./ShufflePlay";
 
 interface CoverProps {
   y: Animated.SharedValue<number>;
 }
-
-export default ({ y }: CoverProps) => {
+const Cover = ({ y }: CoverProps) => {
   const animatedScale = useAnimatedStyle(() => ({
     transform: [
       {
@@ -38,10 +38,6 @@ export default ({ y }: CoverProps) => {
 
   return (
     <Animated.View style={[styles.container, animatedScale]}>
-      <Image
-        style={styles.image}
-        source={require("../../../assets/images/onboarding1.png")}
-      />
       <Animated.View
         style={[
           {
@@ -58,11 +54,10 @@ export default ({ y }: CoverProps) => {
 const styles = StyleSheet.create({
   container: {
     ...StyleSheet.absoluteFillObject,
-    height: MAX_HEADER_HEIGHT + BUTTON_HEIGHT * 2,
   },
   image: {
     ...StyleSheet.absoluteFillObject,
-    width: undefined,
-    height: undefined,
   },
 });
+
+export default Cover;

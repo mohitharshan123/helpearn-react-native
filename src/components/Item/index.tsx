@@ -1,9 +1,9 @@
 import * as React from "react";
 import { View, Text, StyleSheet } from "react-native";
 import { Feather as Icon } from "@expo/vector-icons";
-import { colors } from "../../../styles/colors";
+import { colors } from "../../styles/colors";
 
-export default ({ job }) => (
+const Item = ({ job }) => (
   <View style={styles.row}>
     <View style={styles.cell}>
       <Text style={styles.index}>{job.category}</Text>
@@ -37,3 +37,5 @@ const styles = StyleSheet.create({
     color: "white",
   },
 });
+
+export default Item;

@@ -6,8 +6,8 @@ import Animated, {
   Extrapolate,
   useAnimatedStyle,
 } from "react-native-reanimated";
-import { MIN_HEADER_HEIGHT, HEADER_DELTA } from "./Model";
-import { BUTTON_HEIGHT } from "./ShufflePlay";
+import { MIN_HEADER_HEIGHT, HEADER_DELTA } from "./constants";
+import { SWITCH_HEIGHT } from "../../../constants";
 
 interface HeaderProps {
   y: Animated.SharedValue<number>;
@@ -30,8 +30,7 @@ export default ({  y }: HeaderProps) => {
 
 const styles = StyleSheet.create({
   container: {
-    position: "absolute",
-    top: BUTTON_HEIGHT / 2 - MIN_HEADER_HEIGHT,
+    top: SWITCH_HEIGHT / 2 - MIN_HEADER_HEIGHT,
     left: 0,
     right: 0,
     height: MIN_HEADER_HEIGHT,
