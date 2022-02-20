@@ -18,7 +18,7 @@ const JobTypeSwitcher = () => {
   const switchTranslate = useSharedValue(leftValue);
 
   const [isRemote, setIsRemote] = useState(false);
-  
+
   const animatedSwitch = useAnimatedStyle(() => ({
     transform: [
       {
@@ -53,12 +53,7 @@ const JobTypeSwitcher = () => {
     >
       <Animated.View style={[styles.containerStyle]}>
         <Animated.View
-          style={[
-            styles.circleStyle,
-            { backgroundColor: "gold" },
-            animatedSwitch,
-            styles.shadowValue,
-          ]}
+          style={[styles.circleStyle, animatedSwitch, styles.shadowValue]}
         >
           {isRemote ? (
             <MaterialCommunityIcons
@@ -87,6 +82,7 @@ const styles = StyleSheet.create({
     borderRadius: 33,
     alignItems: "center",
     justifyContent: "center",
+    backgroundColor: "gold",
   },
   text: {
     position: "absolute",

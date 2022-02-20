@@ -21,7 +21,7 @@ const NoopComponent = () => {
   return null;
 };
 
-const Dashboard: React.FC<{}> = () => {
+const Dashboard: React.FC<{}> = ({ navigation }) => {
   const tabBarScreenOptions = ({ route: { name: routeName } }) => ({
     tabBarShowLabel: false,
     headerShown: false,
@@ -49,7 +49,11 @@ const Dashboard: React.FC<{}> = () => {
         name={"Add"}
         component={NoopComponent}
         options={{
-          tabBarButton: () => <AddButton />,
+          tabBarButton: () => (
+            <AddButton
+              navigateToJobCreate={() => navigation.push("JobCreate")}
+            />
+          ),
         }}
       />
       <Tab.Screen name="Notifications" component={Home} />

@@ -7,6 +7,7 @@ import Authentication from "../screens/Authentication";
 import Dashboard from "../screens/Dashboard";
 import Onboarding from "../screens/Onboarding";
 import { UserContext } from "../contexts/user";
+import JobCreate from "../screens/JobCreate";
 
 const Stack = createNativeStackNavigator();
 
@@ -49,6 +50,7 @@ const StackNavigator: React.FC<any> = () => {
       <Stack.Screen name="Onboarding" component={Onboarding} />
       <Stack.Screen name="Authentication" component={Authentication} />
       <Stack.Screen name="Dashboard" component={Dashboard} />
+      <Stack.Screen name="JobCreate" component={JobCreate} />
     </Stack.Navigator>
   );
 };
