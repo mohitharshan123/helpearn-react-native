@@ -13,6 +13,23 @@ const jobs = [
     title: "Buy Grocerries",
     description: "Bug my grocerries",
     tip: 200,
+    creator: "male",
+  },
+  {
+    created_by: "Mohit Harshan",
+    category: "Shopping",
+    title: "Buy Grocerries",
+    description: "Bug my grocerries",
+    tip: 200,
+    creator: "female",
+  },
+  {
+    created_by: "Mohit Harshan",
+    category: "Shopping",
+    title: "Buy Grocerries",
+    description: "Bug my grocerries",
+    tip: 200,
+    creator: "female",
   },
   {
     created_by: "Mohit Harshan",
@@ -27,6 +44,7 @@ const jobs = [
     title: "Buy Grocerries",
     description: "Bug my grocerries",
     tip: 200,
+    creator: "male",
   },
   {
     created_by: "Mohit Harshan",
@@ -34,6 +52,7 @@ const jobs = [
     title: "Buy Grocerries",
     description: "Bug my grocerries",
     tip: 200,
+    creator: "male",
   },
   {
     created_by: "Mohit Harshan",
@@ -41,20 +60,7 @@ const jobs = [
     title: "Buy Grocerries",
     description: "Bug my grocerries",
     tip: 200,
-  },
-  {
-    created_by: "Mohit Harshan",
-    category: "Shopping",
-    title: "Buy Grocerries",
-    description: "Bug my grocerries",
-    tip: 200,
-  },
-  {
-    created_by: "Mohit Harshan",
-    category: "Shopping",
-    title: "Buy Grocerries",
-    description: "Bug my grocerries",
-    tip: 200,
+    creator: "female",
   },
   {
     created_by: "Mohit Harshan",

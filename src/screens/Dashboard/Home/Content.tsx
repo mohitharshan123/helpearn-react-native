@@ -1,13 +1,12 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import {
   StyleSheet,
   TouchableOpacity,
   View,
   SafeAreaView,
   RefreshControl,
+  ScrollView,
 } from "react-native";
-import Animated, { useAnimatedScrollHandler } from "react-native-reanimated";
-import { FlatGrid } from "react-native-super-grid";
 
 import { colors } from "../../../styles/colors";
 import { JobItem, CategoryItem, JobTypeSwitcher } from "../../../components";
@@ -26,21 +25,17 @@ const CATEGORIES: Array<Category> = [
 
 interface ContentProps {
   jobs: any;
-  y: Animated.SharedValue<number>;
 }
 
-export default ({ jobs, y }: ContentProps) => {
+export default ({ jobs }: ContentProps) => {
   const [isRemote, setIsNearby] = useState(false);
   const [categories, setCategories] = useState(CATEGORIES);
   const [selectedCategory, setSelectedCategory] = useState(CATEGORIES[0]);
+  const scrollViewRef = useRef();
 
   const handleOnJobsTypeToggle = (value) => {
     setIsNearby(value);
   };
-
-  const scrollHandler = useAnimatedScrollHandler((event) => {
-    y.value = event.contentOffset.y;
-  });
 
   const renderCategoryRow = (categories) => (
     <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
@@ -49,7 +44,7 @@ export default ({ jobs, y }: ContentProps) => {
           activeOpacity={0.8}
           onPress={() => setSelectedCategory(item)}
         >
-          <CategoryItem y={y} item={item} selectedCategory={selectedCategory} />
+          <CategoryItem item={item} selectedCategory={selectedCategory} />
         </TouchableOpacity>
       ))}
     </View>
@@ -59,12 +54,12 @@ export default ({ jobs, y }: ContentProps) => {
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
-      <Animated.ScrollView
-        onScroll={scrollHandler}
+      <ScrollView
+        ref={scrollViewRef}
         style={styles.container}
         showsVerticalScrollIndicator={false}
         scrollEventThrottle={1}
-        stickyHeaderIndices={[1]}
+        stickyHeaderIndices={[0, 1]}
         refreshControl={
           <RefreshControl
             refreshing={refreshing}
@@ -78,15 +73,14 @@ export default ({ jobs, y }: ContentProps) => {
           {renderCategoryRow(categories.slice(4, 8))}
         </View>
         <JobTypeSwitcher
-          handleOnPress={handleOnJobsTypeToggle}
-          isRemote={isRemote}
+          onSwitch={() => scrollViewRef?.current?.scrollTo({})}
         />
         <View style={styles.jobs}>
           {jobs.map((job, key) => (
             <JobItem {...{ job, key }} />
           ))}
         </View>
-      </Animated.ScrollView>
+      </ScrollView>
     </SafeAreaView>
   );
 };

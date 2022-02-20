@@ -1,12 +1,14 @@
 import * as React from "react";
 import { View, Text, StyleSheet } from "react-native";
 import { Feather as Icon } from "@expo/vector-icons";
+
+import Avatar from "../Avatar";
 import { colors } from "../../styles/colors";
 
 const Item = ({ job }) => (
   <View style={styles.row}>
     <View style={styles.cell}>
-      <Text style={styles.index}>{job.category}</Text>
+      <Avatar type={job.creator} />
     </View>
     <View style={[styles.cell, { flex: 1 }]}>
       <Text style={styles.name}>{job.created_by}</Text>

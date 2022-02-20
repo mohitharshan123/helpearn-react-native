@@ -25,6 +25,7 @@
     "react-native-animated-multistep": "^1.1.1",
     "react-native-gesture-handler": "^2.2.0",
     "react-native-onboarding-swiper": "^1.2.0",
+    "react-native-pull-refresh": "^1.0.0",
     "react-native-reanimated": "^2.4.0",
     "react-native-redash": "^16.2.3",
     "react-native-safe-area-context": "^3.3.2",

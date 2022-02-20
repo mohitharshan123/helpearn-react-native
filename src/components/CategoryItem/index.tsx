@@ -12,7 +12,6 @@ import { MAX_HEADER_HEIGHT } from "../../common/constants";
 import { Category } from "../../common/interfaces/category.interface";
 
 interface CategoryItemProps {
-  y: any;
   item: Category;
   selectedCategory: Category;
 }
@@ -20,21 +19,11 @@ interface CategoryItemProps {
 const CategoryItem: React.FC<any> = ({
   item,
   selectedCategory,
-  y,
 }: CategoryItemProps) => {
-  const animatedOpacity = useAnimatedStyle(() => ({
-    opacity: interpolate(
-      y.value,
-      [-MAX_HEADER_HEIGHT, -SWITCH_HEIGHT / 2],
-      [1, 0],
-      Extrapolate.CLAMP
-    ),
-  }));
   return (
     <View
       style={[
         styles.container,
-        animatedOpacity,
         selectedCategory === item && styles.selectedCatgory,
       ]}
     >

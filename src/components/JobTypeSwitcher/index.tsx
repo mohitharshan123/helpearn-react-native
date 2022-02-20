@@ -12,7 +12,7 @@ import { MaterialCommunityIcons, Entypo } from "@expo/vector-icons";
 import { SWITCH_HEIGHT, SWITCH_WIDTH } from "../../constants";
 import { colors } from "../../styles/colors";
 
-const JobTypeSwitcher = () => {
+const JobTypeSwitcher = ({ onSwitch }) => {
   const leftValue = -SWITCH_WIDTH / 2 + SWITCH_HEIGHT / 2;
   const rightValue = SWITCH_WIDTH / 2 - SWITCH_HEIGHT / 2;
   const switchTranslate = useSharedValue(leftValue);
@@ -42,6 +42,7 @@ const JobTypeSwitcher = () => {
       setIsRemote(false);
       switchTranslate.value = leftValue;
     }
+    onSwitch();
   };
 
   return (

@@ -6,6 +6,8 @@ import SearchActive from "./icons/SearchActive";
 import SearchInactive from "./icons/SearchInactive";
 import MessagesActive from "./icons/MessagesActive";
 import MessagesInactive from "./icons/MessagesInactive";
+import FemaleAvatar from "./icons/FemaleAvatar";
+import MaleAvatar from "./icons/MaleAvatar";
 
 export {
   HomeActive,
@@ -16,4 +18,6 @@ export {
   SearchInactive,
   MessagesActive,
   MessagesInactive,
+  MaleAvatar,
+  FemaleAvatar,
 };

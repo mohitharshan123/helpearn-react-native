@@ -35,7 +35,7 @@ const Authentication: React.FC<{}> = ({ navigation }) => {
     try {
       const { user } = await signInWithEmailAndPassword(auth, email, password);
       setUserInfo(user);
-      navigation.navigate("Dashboard");
+      navigation.replace("Dashboard");
     } catch (e) {
       console.log(e);
     }
