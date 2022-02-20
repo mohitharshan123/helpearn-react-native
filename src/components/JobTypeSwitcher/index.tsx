@@ -1,56 +1,48 @@
 import PropTypes from "prop-types";
-import React, { useEffect, useState, useCallback } from "react";
-import { StyleSheet, Pressable, View, Text } from "react-native";
-import Animated, { interpolateColors, spring } from "react-native-reanimated";
+import React, { useEffect, useState } from "react";
+import { StyleSheet, Pressable, Text } from "react-native";
+import Animated, {
+  spring,
+  useAnimatedStyle,
+  useSharedValue,
+  withSpring,
+} from "react-native-reanimated";
 import { MaterialCommunityIcons, Entypo } from "@expo/vector-icons";
 
 import { SWITCH_HEIGHT, SWITCH_WIDTH } from "../../constants";
 import { colors } from "../../styles/colors";
 
-interface JobTypeSwitcherProps {
-  handleOnPress: Function;
-  isRemote: boolean;
-}
+const JobTypeSwitcher = () => {
+  const leftValue = -SWITCH_WIDTH / 2 + SWITCH_HEIGHT / 2;
+  const rightValue = SWITCH_WIDTH / 2 - SWITCH_HEIGHT / 2;
+  const switchTranslate = useSharedValue(leftValue);
 
-const JobTypeSwitcher = ({ handleOnPress, isRemote }: JobTypeSwitcherProps) => {
-  const [switchTranslate] = useState(new Animated.Value(0));
+  const [isRemote, setIsRemote] = useState(false);
+  
+  const animatedSwitch = useAnimatedStyle(() => ({
+    transform: [
+      {
+        translateX: withSpring(switchTranslate.value, {
+          mass: 1,
+          damping: 20,
+          stiffness: 80,
+          overshootClamping: false,
+          restSpeedThreshold: 0.001,
+          restDisplacementThreshold: 0.001,
+        }),
+      },
+    ],
+  }));
 
-  useEffect(() => {
-    if (isRemote) {
-      spring(switchTranslate, {
-        toValue: SWITCH_WIDTH / 2 - SWITCH_HEIGHT / 2,
-        mass: 1,
-        damping: 20,
-        stiffness: 80,
-        overshootClamping: false,
-        restSpeedThreshold: 0.001,
-        restDisplacementThreshold: 0.001,
-      }).start();
-      return;
+  const onToggle = () => {
+    if (switchTranslate.value === leftValue) {
+      switchTranslate.value = rightValue;
+      setIsRemote(true);
+    } else {
+      setIsRemote(false);
+      switchTranslate.value = leftValue;
     }
-    spring(switchTranslate, {
-      toValue: -SWITCH_WIDTH / 2 + SWITCH_HEIGHT / 2,
-      mass: 1,
-      damping: 20,
-      stiffness: 80,
-      overshootClamping: false,
-      restSpeedThreshold: 0.001,
-      restDisplacementThreshold: 0.001,
-    }).start();
-  }, [isRemote, switchTranslate]);
-
-  // const backgroundColour = {
-  //   backgroundColor: interpolateColors(switchTranslate, {
-  //     inputRange: [0, 20],
-  //     outputColorRange: [
-  //       colors.dark.button.primary,
-  //       colors.dark.button.secondary,
-  //     ],
-  //   }),
-  // };
-  const onToggle = useCallback(() => {
-    handleOnPress(!isRemote);
-  }, [handleOnPress, isRemote]);
+  };
 
   return (
     <Pressable
@@ -64,13 +56,7 @@ const JobTypeSwitcher = ({ handleOnPress, isRemote }: JobTypeSwitcherProps) => {
           style={[
             styles.circleStyle,
             { backgroundColor: "gold" },
-            {
-              transform: [
-                {
-                  translateX: switchTranslate,
-                },
-              ],
-            },
+            animatedSwitch,
             styles.shadowValue,
           ]}
         >
