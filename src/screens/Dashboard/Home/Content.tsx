@@ -1,6 +1,13 @@
 import React, { useState } from "react";
-import { StyleSheet, TouchableOpacity, View, SafeAreaView } from "react-native";
+import {
+  StyleSheet,
+  TouchableOpacity,
+  View,
+  SafeAreaView,
+  RefreshControl,
+} from "react-native";
 import Animated, { useAnimatedScrollHandler } from "react-native-reanimated";
+import { FlatGrid } from "react-native-super-grid";
 
 import { colors } from "../../../styles/colors";
 import { JobItem, CategoryItem, JobTypeSwitcher } from "../../../components";
@@ -48,6 +55,8 @@ export default ({ jobs, y }: ContentProps) => {
     </View>
   );
 
+  const [refreshing] = useState(false);
+
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <Animated.ScrollView
@@ -56,6 +65,13 @@ export default ({ jobs, y }: ContentProps) => {
         showsVerticalScrollIndicator={false}
         scrollEventThrottle={1}
         stickyHeaderIndices={[1]}
+        refreshControl={
+          <RefreshControl
+            refreshing={refreshing}
+            onRefresh={() => {}}
+            title="Loading..."
+          />
+        }
       >
         <View style={{ flexDirection: "column", padding: 20 }}>
           {renderCategoryRow(categories.slice(0, 4))}
